@@ -1,0 +1,41 @@
+Link to problem statement
+https://leetcode.com/problems/high-access-employees/
+
+Leetcode submission
+https://leetcode.com/problems/high-access-employees/submissions/1133989742/
+
+// Code
+
+class Solution {
+public:
+    vector<string> findHighAccessEmployees(vector<vector<string>>& arr) {
+        vector<string> ans;
+        unordered_map<string, vector<int>> m;
+        for(int i=0;i<arr.size();i++){
+            string s = arr[i][0];
+            int num = stoi(arr[i][1]);
+            m[s].push_back(num);
+        }
+
+        for(auto& it:m){
+            sort(it.second.begin(), it.second.end());
+        }
+        
+        for(auto it:m){
+            int i=0,j=0;
+            int cnt=0,cmax=0;
+            while(i<it.second.size() && j<it.second.size()){
+                if(it.second[j]-it.second[i]==0) j++;
+                else if(it.second[j]-it.second[i]<100){
+                    cnt = j-i+1;
+                    cmax = max(cmax,cnt);
+                    j++;
+                }
+                else i++;
+            }
+            if(cmax>=3) ans.push_back(it.first);
+        }
+        
+        return ans;
+    }
+};
