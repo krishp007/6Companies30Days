@@ -1,0 +1,32 @@
+Link to problem submission
+https://leetcode.com/problems/image-smoother/submissions/1140320019/
+
+Code
+
+class Solution {
+public:
+    vector<vector<int>> imageSmoother(vector<vector<int>>& img) {
+        int m = img.size(), n = img[0].size();
+        vector<vector<int>> ans(m, vector<int>(n));
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                int sum=0, cnt=0;
+
+                for(int dr = -1;dr<=1;dr++){
+                    for(int dc=-1;dc<=1;dc++){
+                        int nr = i+dr;
+                        int nc = j+dc;
+
+                        if(nr>=0 && nr<m && nc>=0 && nc<n){
+                            sum += img[nr][nc];
+                            cnt++;
+                        }
+                    }
+                }
+                ans[i][j] = sum/cnt;
+            }
+        }
+        return ans;
+    }
+};
