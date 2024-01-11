@@ -1,0 +1,28 @@
+Link to problem submission
+https://leetcode.com/problems/k-diff-pairs-in-an-array/submissions/1143237798/
+
+Code
+
+class Solution {
+public:
+    int findPairs(vector<int>& nums, int k) {
+        unordered_map<int,int> m;
+
+        for(auto it:nums){
+            m[it]++;
+        }
+
+        int ans=0;
+        
+        for(auto it:m){
+            if(k==0){
+                if(it.second>1) ans++;
+            }
+            else{
+                if(m.find(it.first+k)!=m.end()) ans++;
+            }
+        }
+       
+        return ans;
+    }
+};
