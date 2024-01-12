@@ -1,0 +1,30 @@
+Link to problem
+https://leetcode.com/problems/friends-of-appropriate-ages/
+
+Code
+
+class Solution {
+public:
+    int numFriendRequests(vector<int>& ages) {
+        int n = ages.size();
+        sort(ages.begin(),ages.end());
+        int ans=0;
+
+        for(int i=0;i<n;i++){
+            float x=ages[i];
+            float y = x*(0.5)+7;
+
+            int high = upper_bound(ages.begin(),ages.end(),x)- ages.begin();
+            high--;
+            int low = upper_bound(ages.begin(),ages.end(),y)- ages.begin();
+            
+            if(high<low || (ages[high]<100 && ages[low]>100)){
+                continue;
+            }
+            else{
+                ans += (high-low);
+            }
+        }
+        return ans;
+    }
+};
