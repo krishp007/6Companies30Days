@@ -1,0 +1,45 @@
+Link to problem statement
+https://leetcode.com/problems/find-players-with-zero-or-one-losses/description/
+
+Code
+
+class Solution {
+public:
+    vector<vector<int>> findWinners(vector<vector<int>>& matches) {
+        vector<vector<int>> ans(2);
+        vector<int> v1,v2,w;
+        set<int> s;
+        unordered_map<int, int> m;
+
+        for(auto it:matches){
+            w.push_back(it[0]);
+            m[it[1]]++;
+        }
+        
+        for(auto it:w){
+            if(m.find(it)!=m.end()){
+                continue;
+            }
+            else{
+                s.insert(it);
+            }
+        }
+
+        for(auto it:m){
+            if(it.second==1){
+                v2.push_back(it.first);
+            }
+        }
+
+        for(auto it:s){
+            v1.push_back(it);
+        }
+
+        sort(v1.begin(),v1.end());
+        sort(v2.begin(),v2.end());
+        ans[0]=v1;
+        ans[1]=v2;
+        
+        return ans;
+    }
+};
